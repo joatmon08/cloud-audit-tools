@@ -1,0 +1,13 @@
+policies:
+  - name: ec2-tags-noncompliant
+    resource: ec2
+    filters:
+      - "tag:joatmon08": absent
+    actions:
+      - stop
+  - name: s3-tags-noncompliant
+    resource: s3
+    filters:
+      - "tag:joatmon08": absent
+    actions:
+      - no-op
