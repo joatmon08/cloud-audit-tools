@@ -1,0 +1,15 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kube-bench-node
+  namespace: audit
+spec:
+  template:
+    spec:
+      hostPID: true
+      containers:
+      - name: kube-bench
+        image: aquasec/kube-bench:latest
+        args: ["node",  "--version", "1.11"]
+      restartPolicy: Never

@@ -1,0 +1,21 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kube-bench-master
+  namespace: audit
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      hostPID: true
+      containers:
+      - name: kube-bench
+        image: aquasec/kube-bench:latest
+        args: ["master",  "--version", "1.11"]
+      restartPolicy: Never
